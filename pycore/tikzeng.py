@@ -21,6 +21,7 @@ def to_cor():
 \def\FcReluColor{rgb:blue,5;red,5;white,4}
 \def\SoftmaxColor{rgb:magenta,5;black,7}   
 \def\SumColor{rgb:blue,5;green,15}
+\def\GreyColor{rgb:blue,50;green,50;red,50}
 """
 
 def to_begin():
@@ -178,10 +179,29 @@ def to_Sum( name, offset="(0,0,0)", to="(0,0,0)", radius=2.5, opacity=0.6):
     };
 """
 
+def to_Node( name, logo, caption, fill="\SumColor", offset="(0,0,0)", to="(0,0,0)", radius=2.5, opacity=0.6):
+    return r"""
+\pic[shift={"""+ offset +"""}] at """+ to +""" 
+    {Ball={
+        name=""" + name +""",
+        fill=""" + fill +""",
+        opacity="""+ str(opacity) +""",
+        radius="""+ str(radius) +""",
+        caption="""+ caption +r""",
+        logo=$""" + logo + """$
+        }
+    };
+"""
+
 
 def to_connection( of, to):
     return r"""
 \draw [connection]  ("""+of+"""-east)    -- node {\midarrow} ("""+to+"""-west);
+"""
+
+def to_connection_triangle( of, to, dest='north'):
+    return r"""
+\draw [connection]  ("""+of+"""-east) -- node {\midarrow} ("""+of+"""-east -| """+to+"""-south)-- node {\midarrow} ("""+to+"""-"""+dest+""");
 """
 
 def to_skip( of, to, pos=1.25):
