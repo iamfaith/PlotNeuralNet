@@ -14,6 +14,8 @@ arch = [
     to_head('..'),
     to_cor(),
     to_begin(),
+    to_input("/home/faith/must_paper/img/RGB.png", to='(-5, -8, 0)', caption="RGB image", caption_to='(-5, -2, 0)'),
+    to_input("/home/faith/must_paper/img/XYZTransform.png", to='(-5, 8, 0)'),
     to_Conv("conv1", '', '', offset="(0,-5,0)", to="(0,0,0)", height=64, depth=64, width=2, caption="Conv1"),
     to_Pool("pool1", offset="(0,0,0)", to="(conv1-east)"),
     to_Conv("conv2", '', '', offset="(4,0,0)", to="(pool1-east)", height=32, depth=32, width=2, caption="Conv2"),

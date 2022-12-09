@@ -9,6 +9,7 @@ def to_head( projectpath ):
 \subimport{"""+ pathlayers + r"""}{init}
 \usetikzlibrary{positioning}
 \usetikzlibrary{3d} %for including external image 
+\usepackage{capt-of}
 """
 
 def to_cor():
@@ -36,9 +37,14 @@ def to_begin():
 
 # layers definition
 
-def to_input( pathfile, to='(-3,0,0)', width=8, height=8, name="temp" ):
+def to_input( pathfile, to='(-5,0,0)', width=8, height=8, name="temp", caption=None, caption_to='(-5, 0, 0)'):
+    if caption is None:
+        node_caption = ""
+    else:
+        node_caption = r"""\node[inner sep=0pt,below=\belowcaptionskip,text width=\linewidth] (""" + name + """) at (-5, 2, 0) {\captionof*{figure}{""" + caption + """}};"""
     return r"""
 \node[canvas is zy plane at x=0] (""" + name + """) at """+ to +""" {\includegraphics[width="""+ str(width)+"cm"+""",height="""+ str(height)+"cm"+"""]{"""+ pathfile +"""}};
+""" + node_caption + """
 """
 
 # Conv
